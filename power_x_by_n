@@ -16,7 +16,7 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 */
 /* JAVA */
 class Solution {
-    public double binary (double x, int n) {
+    public double binary (double x, long n) {
         double result = 1;
         if (n == 0) return 1;
 
@@ -36,6 +36,6 @@ class Solution {
         return result;
     }
     public double myPow(double x, int n) {
-        return binary(x, n);
+        return binary(x, (long)n);
     }
 }
