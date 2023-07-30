@@ -1,0 +1,57 @@
+/*
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+
+ 
+
+Example 1:
+
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+Example 2:
+
+Input: digits = ""
+Output: []
+Example 3:
+
+Input: digits = "2"
+Output: ["a","b","c"]
+*/
+/* JAVA */
+class Solution {
+    HashMap<Character, String> hm = new HashMap<Character, String>();
+  
+    
+    public void generate_words(String current_word, String digits, int current_index, List<String> result) {
+        if (current_index == digits.length()) {
+            result.add(current_word);
+            return;
+        }    
+        
+        String seq = hm.get(digits.charAt(current_index));
+        
+        for (int i = 0; i < seq.length(); i++) {
+            generate_words(current_word+seq.charAt(i), digits, current_index+1, result);
+        }
+        
+    }
+    public void helper(String digits, List<String> result) {
+        generate_words("", digits, 0, result);
+    }
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<String>();
+        hm.put('2',"abc");
+        hm.put('3',"def");
+        hm.put('4',"ghi");
+        hm.put('5',"jkl");
+        hm.put('6',"mno");
+        hm.put('7',"pqrs");
+        hm.put('8',"tuv");
+        hm.put('9',"wxyz");
+        if (digits.length() == 0) return result;
+        helper(digits,result);
+        return result;
+    }
+}
