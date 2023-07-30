@@ -1,0 +1,48 @@
+/*
+Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+Example 2:
+
+Input: nums = [1], k = 1
+Output: [1]
+*/
+
+/* JAVA */
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        
+        if (k == nums.length) return nums;
+
+        for (int i = 0; i < nums.length; i++) {
+            hm.put(nums[i],hm.getOrDefault(nums[i],0)+1);
+        }
+        Queue<Integer> q = new PriorityQueue<Integer>((a,b)->hm.get(a)-hm.get(b));
+        for (Map.Entry<Integer,Integer> entry:hm.entrySet()) {
+            System.out.println(entry.getKey()+":"+entry.getValue());
+            q.add(entry.getKey());
+            if (q.size() > k) {
+                q.poll();
+
+            }
+        }
+       
+        System.out.println(q);
+        int result[] = new int[k];
+        int c = 0;
+
+        while (c < k) {
+            result[c] = q.poll();
+            c++;
+        }
+  
+
+        return result;
+    }
+}
